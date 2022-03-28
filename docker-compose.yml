@@ -1,0 +1,31 @@
+version: '3.8'
+
+services: 
+  backend: 
+    container_name: backend
+    image: node
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+    - PGUSER=anujr
+    - PGPASSWORD=anujr
+    - PGDATABASE=test_db
+    - PGHOST=db # NAME OF THE SERVICE
+    depends_on: 
+      - db
+  db:
+    container_name: db
+    image: 'postgres'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=anujr
+      - POSTGRES_PASSWORD=anujr
+      - POSTGRES_DB=test_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
