@@ -4,16 +4,15 @@ services:
   backend: 
     container_name: backend
     image: node
-    build:
-      context: .
+    build: .
     ports:
       - 3000:3000
     environment:
     - PGUSER=anujr
     - PGPASSWORD=anujr
-    - PGDATABASE=test_db
+    - PGDATABASE=database_development
     - PGHOST=db # NAME OF THE SERVICE
-    depends_on: 
+    depends_on: # will wait for db service to finish
       - db
   db:
     container_name: db
@@ -23,9 +22,9 @@ services:
     environment:
       - POSTGRES_USER=anujr
       - POSTGRES_PASSWORD=anujr
-      - POSTGRES_DB=test_db
+      - POSTGRES_DB=database_development
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data # stores data into local-dir
 
 volumes:
   pgdata: {}
