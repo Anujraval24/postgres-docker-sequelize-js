@@ -1,4 +1,4 @@
-# postgres-docker-sequelize-js
+# postgres-docker-sequelize-ts
 
 Commands: 
 
